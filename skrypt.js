@@ -32,6 +32,16 @@ const lista_histori = document.getElementById("lista_histori");
 const reset = document.getElementById("reset");
 
 
+function sprawdz_daty() {
+    const savedDaty = localStorage.getItem("date");
+    const today = Date().toLocaleDateString();
+
+    if (savedDaty !== today) {
+        localStorage.clear();
+        localStorage.setItem("date", today);
+    }
+}
+
 function animateDraw(callback) {
     let liczenie = 0;
 
@@ -48,7 +58,7 @@ function animateDraw(callback) {
 }
 
 generuj.addEventListener("click", () => {
-    checkDateReset();
+    sprawdz_daty();
 
     animateDraw(() => {
         const random = wyzwania[Math.floor(Math.random() * wyzwania.length)];
@@ -64,7 +74,7 @@ generuj.addEventListener("click", () => {
 zrobione.addEventListener("click", () => {
     wyzwanie_tekst.classList.add("completed");
 
-    let historia_d = JSON.parse(localStorage.getItem("history")) || [];
+    let historia_d = JSON.parse(localStorage.getItem("historia_d")) || [];
 
     historia_d .push({
         text: wyzwanie_tekst.textContent,
@@ -79,9 +89,9 @@ pokaz_historie.addEventListener("click", () => {
     historia.classList.toggle("hidden");
     lista_histori.innerHTML = "";
 
-    const historia_z = JSON.parse(localStorage.getItem("history")) || [];
+    const historia_d = JSON.parse(localStorage.getItem("historia_d")) || [];
 
-    if (historia_z.length === 0){
+    if (historia_d.length === 0){
         const li = document.createElement("li");
         li.textContent = `Brak histori`;
         lista_histori.appendChild(li);
@@ -89,7 +99,7 @@ pokaz_historie.addEventListener("click", () => {
 
     }
     else{
-        historia_z.forEach(item => {
+        historia_d.forEach(item => {
         const li = document.createElement("li");
         li.textContent = `${item.text} (${item.time})`;
         lista_histori.appendChild(li);
@@ -108,3 +118,8 @@ reset.addEventListener("click", () => {
         wyzwanie.classList.add("hidden");
 
 });
+
+
+checkDateReset();
+
+
