@@ -20,3 +20,13 @@ const wyzwania = [
     "Zaplanuj jutrzejszy dzień",
     "Podziękuj za ten dzień"
 ];
+
+
+const generuj = document.getElementById("generuj");
+const wyzwanie = document.getElementById("wyzwanie");
+const wyzwanie_tekst = document.getElementById("wyzwanie_tekst");
+const zrobione = document.getElementById("zrobione");
+const pokaz_historie = document.getElementById("pokaz_historie");
+const historia = document.getElementById("historia");
+const lista_histori = document.getElementById("lista_histori");
+const reset = document.getElementById("reset");
