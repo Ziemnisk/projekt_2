@@ -34,7 +34,7 @@ const reset = document.getElementById("reset");
 
 function sprawdz_daty() {
     const savedDaty = localStorage.getItem("date");
-    const today = Date().toLocaleDateString();
+    const today = new Date().toLocaleDateString();
 
     if (savedDaty !== today) {
         localStorage.clear();
@@ -65,14 +65,14 @@ generuj.addEventListener("click", () => {
         wyzwanie_tekst.textContent = random;
     });
 
-    wyzwanie_tekst.classList.remove("completed");
-    wyzwanie.classList.remove("hidden");
+    wyzwanie_tekst.classList.remove("zrobione");
+    wyzwanie.classList.remove("ukryty");
 
 });
 
 
 zrobione.addEventListener("click", () => {
-    wyzwanie_tekst.classList.add("completed");
+    wyzwanie_tekst.classList.add("zrobione");
 
     let historia_d = JSON.parse(localStorage.getItem("historia_d")) || [];
 
@@ -81,12 +81,12 @@ zrobione.addEventListener("click", () => {
         time: new Date().toLocaleTimeString()
     });
 
-    localStorage.setItem("history", JSON.stringify(historia_d ));
+    localStorage.setItem("historia_d", JSON.stringify(historia_d));
 });
 
 
 pokaz_historie.addEventListener("click", () => {
-    historia.classList.toggle("hidden");
+    historia.classList.toggle("ukryty");
     lista_histori.innerHTML = "";
 
     const historia_d = JSON.parse(localStorage.getItem("historia_d")) || [];
@@ -112,14 +112,14 @@ pokaz_historie.addEventListener("click", () => {
 
 reset.addEventListener("click", () => {
 
-        localStorage.removeItem("history");
+        localStorage.removeItem("historia_d");
 
         wyzwanie_tekst.textContent = "";
-        wyzwanie.classList.add("hidden");
+        wyzwanie.classList.add("ukryty");
 
 });
 
 
-checkDateReset();
+sprawdz_daty();
 
 
