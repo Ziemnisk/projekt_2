@@ -30,7 +30,13 @@ const pokaz_historie = document.getElementById("pokaz_historie");
 const historia = document.getElementById("historia");
 const lista_histori = document.getElementById("lista_histori");
 const reset = document.getElementById("reset");
+const liczba_w = document.getElementById("liczba_w");
+const liczba_z = document.getElementById("liczba_z");
 
+function liczniki() {
+    liczba_w.textContent = localStorage.getItem("liczba_w") || 0;
+    liczba_z.textContent = localStorage.getItem("liczba_z") || 0;
+}
 
 function sprawdz_daty() {
     const savedDaty = localStorage.getItem("date");
@@ -39,6 +45,8 @@ function sprawdz_daty() {
     if (savedDaty !== today) {
         localStorage.clear();
         localStorage.setItem("date", today);
+        localStorage.setItem("liczba_w", 0);
+        localStorage.setItem("liczba_z", 0);
     }
 }
 
@@ -65,6 +73,12 @@ generuj.addEventListener("click", () => {
         wyzwanie_tekst.textContent = random;
     });
 
+    let wszystkie = parseInt(localStorage.getItem("liczba_w")) || 0;
+    wszystkie++;
+    localStorage.setItem("liczba_w", wszystkie);
+
+    liczniki();
+
     wyzwanie_tekst.classList.remove("zrobione");
     wyzwanie.classList.remove("ukryty");
 
@@ -82,6 +96,12 @@ zrobione.addEventListener("click", () => {
     });
 
     localStorage.setItem("historia_d", JSON.stringify(historia_d));
+
+    let zrobione_count = parseInt(localStorage.getItem("liczba_z")) || 0;
+    zrobione_count++;
+    localStorage.setItem("liczba_z", zrobione_count);
+
+    liczniki();
 });
 
 
@@ -114,6 +134,11 @@ reset.addEventListener("click", () => {
 
         localStorage.removeItem("historia_d");
 
+        localStorage.setItem("liczba_w", 0);
+        localStorage.setItem("liczba_z", 0);
+
+        liczniki();
+
         wyzwanie_tekst.textContent = "";
         wyzwanie.classList.add("ukryty");
 
@@ -121,5 +146,6 @@ reset.addEventListener("click", () => {
 
 
 sprawdz_daty();
+liczniki();
 
 
