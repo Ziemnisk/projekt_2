@@ -6,6 +6,7 @@ body{
     align-items: center;
     height: 100vh;
     margin: 0;
+    overflow-y: auto;
 }
 
 
@@ -89,6 +90,26 @@ span{
     color: white;
     padding: 4px;
     border-radius: 8px;
+}
+
+.stopka{
+    position:absolute;
+    bottom:0;
+    background-color: #ff6b6b;
+    width: 100%;
+}
+.info{
+    width: 90%;
+    padding: 0 5% 1vh 5%;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+}
+img{
+    width: 64px;
+    height: 64px;
+    border-radius: 100%;
 }
 
 @keyframes fadeIn {
